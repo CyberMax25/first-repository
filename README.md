@@ -1,1 +1,1 @@
-# first-repository
+print("Всем привет!")
