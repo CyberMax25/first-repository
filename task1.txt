@@ -1,0 +1,3 @@
+echo "First task in main" > task1.txt
+git add task1.txt
+git commit -m "feat: complete first task in main"
