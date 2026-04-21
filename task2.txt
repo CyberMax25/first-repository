@@ -1,0 +1,3 @@
+echo "Second task in dev" > task2.txt
+git add task2.txt
+git commit -m "feat: complete second task in dev"
