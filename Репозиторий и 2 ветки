@@ -1,0 +1,13 @@
+mkdir git-conflict-lab
+cd git-conflict-lab
+
+git init
+
+echo "Line 1: Initial content" > file.txt
+git add file.txt
+git commit -m "Initial commit"
+
+git checkout -b feature-1
+
+git checkout main
+git checkout -b feature-2
