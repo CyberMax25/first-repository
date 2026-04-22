@@ -1,13 +1,11 @@
-mkdir git-conflict-lab
-cd git-conflict-lab
-
-git init
-
-echo "Line 1: Initial content" > file.txt
+git checkout feature-1
+echo "Line 2: Added by feature-1" >> file.txt
 git add file.txt
-git commit -m "Initial commit"
+git commit -m "Add second line in feature-1"
 
-git checkout -b feature-1
+git checkout feature-2
+echo "Line 2: Added by feature-2 (different text)" >> file.txt
+git add file.txt
+git commit -m "Add second line in feature-2 with different text"
 
-git checkout main
-git checkout -b feature-2
+git log --oneline --graph --all
