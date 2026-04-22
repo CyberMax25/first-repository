@@ -1,4 +1,4 @@
-git merge feature-1
+git checkout feature-1
 
 echo "Line 2: Added by feature-1" >> file.txt
 git add file.txt
