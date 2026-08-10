@@ -1,0 +1,132 @@
+client_manager/                          # Корневая папка проекта
+│
+├── Веб-приложение.py                    # Основной файл (содержит весь код проекта)
+│
+├── manage.py                            # Управляющий скрипт Django
+│
+├── requirements.txt                     # Файл с зависимостями (нужно создать)
+│
+├── .env                                 # Файл с переменными окружения
+│
+├── db.sqlite3                           # База данных SQLite (если используется)
+│
+├── init_db.py                           # Скрипт для заполнения тестовыми данными
+│
+├── client_manager/                      # Основная конфигурационная папка проекта
+│   ├── __init__.py                      # Инициализация пакета (с Celery)
+│   ├── settings.py                      # Основные настройки проекта
+│   ├── urls.py                          # Главные URL-маршруты
+│   ├── wsgi.py                          # WSGI-приложение для серверов
+│   ├── asgi.py                          # ASGI-приложение для асинхронных серверов
+│   └── celery.py                        # Конфигурация Celery
+│
+├── core/                                # Основное приложение
+│   ├── __init__.py                      # Инициализация приложения
+│   ├── admin.py                         # Настройки админ-панели Django
+│   ├── apps.py                          # Конфигурация приложения
+│   ├── models.py                        # Модели базы данных:
+│   │   ├── Client                       # Модель клиента
+│   │   ├── Category                     # Модель категории задач
+│   │   ├── Task                         # Модель задачи
+│   │   ├── WellnessRecord               # Модель записи самочувствия
+│   │   ├── ProgressRecord               # Модель записи прогресса
+│   │   ├── ClientGoal                   # Модель цели клиента
+│   │   └── Notification                 # Модель уведомления
+│   │
+│   ├── views.py                         # Контроллеры (обработчики запросов):
+│   │   ├── CustomLoginView              # Кастомная страница входа
+│   │   ├── register                     # Регистрация пользователя
+│   │   ├── dashboard                    # Главная страница
+│   │   ├── client_list                  # Список клиентов
+│   │   ├── client_detail                # Детальная страница клиента
+│   │   ├── client_create                # Создание клиента
+│   │   ├── client_edit                  # Редактирование клиента
+│   │   ├── task_list                    # Список задач
+│   │   ├── task_create                  # Создание задачи
+│   │   ├── task_edit                    # Редактирование задачи
+│   │   ├── task_complete                # Завершение задачи
+│   │   ├── wellness_tracker             # Трекер самочувствия
+│   │   ├── wellness_add                 # Добавление записи самочувствия
+│   │   ├── progress_tracker             # Трекер прогресса
+│   │   ├── progress_add                 # Добавление записи прогресса
+│   │   ├── goal_list                    # Список целей
+│   │   ├── goal_create                  # Создание цели
+│   │   ├── goal_edit                    # Редактирование цели
+│   │   ├── notifications                # Страница уведомлений
+│   │   └── api_stats                    # API статистики
+│   │
+│   ├── urls.py                          # URL-маршруты приложения core
+│   │
+│   ├── forms.py                         # Формы Django:
+│   │   ├── ClientForm
+│   │   ├── TaskForm
+│   │   ├── WellnessRecordForm
+│   │   ├── ProgressRecordForm
+│   │   ├── ClientGoalForm
+│   │   ├── CustomUserCreationForm
+│   │   └── TaskFilterForm
+│   │
+│   ├── serializers.py                   # Сериализаторы DRF:
+│   │   ├── ClientSerializer
+│   │   ├── TaskSerializer
+│   │   ├── WellnessRecordSerializer
+│   │   ├── ProgressRecordSerializer
+│   │   └── ClientGoalSerializer
+│   │
+│   ├── utils.py                         # Утилиты и вспомогательные функции:
+│   │   ├── generate_wellness_chart_data
+│   │   ├── generate_progress_chart_data
+│   │   ├── check_overdue_tasks
+│   │   ├── check_upcoming_tasks
+│   │   ├── get_wellness_stats
+│   │   └── get_priority_score
+│   │
+│   ├── tasks.py                         # Celery-задачи:
+│   │   ├── check_overdue_tasks_task
+│   │   ├── check_upcoming_tasks_task
+│   │   ├── generate_weekly_report
+│   │   └── send_wellness_alert
+│   │
+│   ├── signals.py                       # Сигналы Django:
+│   │   ├── create_user_client           # Создание клиента при регистрации
+│   │   ├── task_notification            # Уведомление о новой задаче
+│   │   └── cleanup_client_data          # Очистка при удалении клиента
+│   │
+│   ├── context_processors.py            # Контекстные процессоры:
+│   │   └── notifications_context        # Количество непрочитанных уведомлений
+│   │
+│   ├── tests.py                         # Тесты:
+│   │   ├── ClientModelTest
+│   │   ├── TaskModelTest
+│   │   ├── WellnessRecordModelTest
+│   │   └── ViewTest
+│   │
+│   └── management/                      # Кастомные команды Django
+│       └── commands/
+│           └── check_tasks.py           # Команда проверки задач
+│
+├── templates/                           # HTML-шаблоны
+│   ├── dashboard.html                   # Главная страница
+│   ├── client_list.html                 # Список клиентов
+│   ├── client_detail.html               # Детальная страница клиента
+│   ├── client_form.html                 # Форма клиента
+│   ├── task_list.html                   # Список задач
+│   ├── task_form.html                   # Форма задачи
+│   ├── wellness_tracker.html            # Трекер самочувствия
+│   ├── wellness_form.html               # Форма самочувствия
+│   ├── progress_tracker.html            # Трекер прогресса
+│   ├── progress_form.html               # Форма прогресса
+│   ├── goal_list.html                   # Список целей
+│   ├── goal_form.html                   # Форма цели
+│   ├── notifications.html               # Страница уведомлений
+│   ├── login.html                       # Страница входа
+│   └── register.html                    # Страница регистрации
+│
+├── static/                              # Статические файлы (CSS, JS, изображения)
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── media/                               # Медиафайлы (загруженные пользователями)
+│
+└── staticfiles/                         # Собранные статические файлы (для продакшена)
